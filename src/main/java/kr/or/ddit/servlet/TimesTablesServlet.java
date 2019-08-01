@@ -55,5 +55,4 @@ public class TimesTablesServlet extends HttpServlet{
 		pw.write("</html>");
 	}
 	
-	
 }
