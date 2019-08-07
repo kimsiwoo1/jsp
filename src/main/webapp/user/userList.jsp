@@ -85,7 +85,7 @@
             %>
             <tr>
                <td><%=userVo.getUserId() %></td>
-               <td><%=userVo.getUserName() %></td>
+               <td><%=userVo.getUserNm() %></td>
                <td></td>
                <td></td>
             </tr>

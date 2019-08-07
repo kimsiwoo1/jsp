@@ -24,7 +24,7 @@
 		</tr>
 		<%for(int i=0; i<list.size(); i++){%>
 			<tr>
-				<td><%=list.get(i).getUserName() %></td>
+				<td><%=list.get(i).getUserNm()%></td>
 			</tr>
 		<%} %>
 		
