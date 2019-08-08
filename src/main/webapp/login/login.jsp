@@ -1,4 +1,4 @@
-<%@page import="kr.or.ddit.user.model.UserVo"%>
+<%@page import="kr.or.ddit.user.model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,10 +15,10 @@
     <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="<%=request.getContextPath() %>/css/signin.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/signin.css" rel="stylesheet">
 
   </head>
 
@@ -27,9 +27,9 @@
     <div class="container">
     	<%
     		HttpSession httpSession = request.getSession();
-    		UserVo userVo = (UserVo)httpSession.getAttribute("S_USERVO");
-    		String userName = "";
-    		userName = userVo == null ? "":userVo.getUserNm();
+    	    		User userVo = (User)httpSession.getAttribute("S_USERVO");
+    	    		String userName = "";
+    	    		userName = userVo == null ? "":userVo.getUserNm();
     	%>
     		
     	사용자 이름: <%=userName %>
@@ -45,7 +45,7 @@
         %>
         <input type="text" id="userId" name="userId" class="form-control" placeholder="userId" value = "<%=userId %>" required autofocus> <!-- value="brown" -->
         <label for="pass" class="sr-only">Password</label>
-        <input type="password" id="pass" name="password" class="form-control" placeholder="Password" required> <!-- value="brown1234" -->
+        <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" required> <!-- value="brown1234" -->
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me

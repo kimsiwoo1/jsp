@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.or.ddit.user.model.UserVo;
+import kr.or.ddit.user.model.User;
+import kr.or.ddit.user.repository.IUserDao;
+import kr.or.ddit.user.repository.UserDao;
 
 /**
  * Servlet implementation class LoginController
@@ -53,27 +55,26 @@ public class LoginController extends HttpServlet {
 		logger.debug("login controller doPost()");
 		//userId, password 파라미터 logger 출력
 		String userId = request.getParameter("userId");
-		String password = request.getParameter("password");
+		String pass = request.getParameter("pass");
 		
 		logger.debug("userId: {}", userId);
-		logger.debug("password: {}", password);
+		logger.debug("password: {}", pass);
 		
 		//사용자가 입력한 계정정보와 db에 있는 값이랑 비교
 		
 		//db에서 조회해온 사용자 정보
-		UserVo userVo = new UserVo();
-		userVo.setUserNm("브라운");
-		userVo.setUserId("brown");
-		userVo.setPass("brown1234");
+		IUserDao userDao = new UserDao();
+		User user = userDao.getUser(userId);
+		
 		
 		//사용자가 입력한 파라미터 정보와 db에서 조회해온 값이 동일할 경우 -->webapp/main.jsp
 		//사용자가 입력한 파라미터 정보와 db에서 조회해온 값이 다를 경우 -->webapp/login/login.jsp
-		
-		if(userId.equals(userVo.getUserId()) && password.equals(userVo.getPass())) {
+		if(user.checkLoginValidate(userId, pass)) {
+		//if(userId.equals(user.getUserId()) && password.equals(user.getPass())) {
 			HttpSession session = request.getSession();
 			logger.debug("session.getId(): {}", session.getId());
 			
-			session.setAttribute("S_USERVO", userVo);
+			session.setAttribute("S_USERVO", user);
 			request.getRequestDispatcher("/main.jsp").forward(request, response);
 		}else {
 			//forward의 경우 request, reponse객체를 공유
