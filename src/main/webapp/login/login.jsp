@@ -23,10 +23,11 @@
 <link href="<%=request.getContextPath()%>/css/signin.css"
 	rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/js.cookie.js"></script>
 <script>
 	$(document).ready(function() {
 
-		var userId = getCookie("userId");
+		var userId = Cookies.get("userId");
 		if (userId != undefined) {
 			$("#userId").val(userId)
 			//remember me checkbox 체크
@@ -39,10 +40,11 @@
 
 			// remember me check box가 체크가 되었는지??
 			if ($('#rememberMe').prop("checked")) {
-				setCookie("userId", $('#userId').val(), 30);
-			} else {
+				//setCookie("userId", $('#userId').val(), 30);
+				Cookies.set("userId", $("#userid").val(), {expires : 30});
+			} /* else {
 				deleteCookie("userId");
-			}
+			} */
 
 			//로그인 요청
 			$('#frm').submit();
@@ -57,7 +59,7 @@
 		});
 	});
 
-	function getCookie(cookieId) {
+/* 	function getCookie(cookieId) {
 		var cookies = document.cookie.split("; ");
 		for (var i = 0; i < cookies.length; i++) {
 			var cookie = cookies[i];
@@ -68,18 +70,18 @@
 			}
 		}
 		return null;
-	}
+	} */
 
-	function setCookie(cookieNm, cookieValue, expires) {
+/* 	function setCookie(cookieNm, cookieValue, expires) {
 		var dt = new Date();
 		dt.setDate(dt.getDate() + Number(expires));
 
 		document.cookie = cookieNm + "=" + cookieValue + "; path=/; expires="
 				+ dt.toGMTString();
-	}
+	} */
 
 	function deleteCookie(cookieNm) {
-		setCookie(cookieNm, "", -1);
+		Cookies.remove("userId");
 	}
 </script>
 </head>
