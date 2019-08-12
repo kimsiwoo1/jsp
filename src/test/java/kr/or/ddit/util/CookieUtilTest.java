@@ -6,18 +6,32 @@ import org.junit.Test;
 
 public class CookieUtilTest {
 
+	/**
+	* Method : getCookieTest
+	* 작성자 : SEM-PC
+	* 변경이력 :
+	* Method 설명 : 쿠키 가져오기 테스트
+	*/
 	@Test
-	public void test() {
+	public void getCookieTest() {
 		/***Given***/
-		String cookieString = "rememberMe=Y; userId=brown; test=testValue";
+						//쿠키이름=쿠키값구분자쿠키이름=쿠키값구분자쿠키이름=쿠키값구분자
+						//구분자 : [; ]
+		String cookieString = "userId=brown; rememberMe=Y; test=testValue";
+		
 		/***When***/
-		String cookieValue = CookieUtil.getCookie(cookieString, "rememberMe");
-		String cookieValue2 = CookieUtil.getCookie(cookieString, "userId");
-		String cookieValue3 = CookieUtil.getCookie(cookieString, "test");
+		String userIdCookieValue = CookieUtil.getCookie(cookieString, "userId");
+		String rememberMeCookieValue = CookieUtil.getCookie(cookieString, "rememberMe");
+		String testCookieValue = CookieUtil.getCookie(cookieString, "test");
+		String notExistsCookieValue = CookieUtil.getCookie(cookieString, "notExists");
+
 		/***Then***/
-		assertEquals("Y", cookieValue);
-		assertEquals("brown", cookieValue2);
-		assertEquals("testValue", cookieValue3);
+		assertEquals("brown", userIdCookieValue);
+		assertEquals("Y", rememberMeCookieValue);
+		assertEquals("testValue", testCookieValue);
+		assertNull(notExistsCookieValue);
+		//assertEquals(null, notExistsCookieValue);
+		
 	}
 
 }
