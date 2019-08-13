@@ -17,17 +17,17 @@ public class UserDaoTest {
 	* 변경이력 :
 	* Method 설명 : getUserList 테스트
 	 */
-	@Test
-	public void getUserListTest() {
-		/***Given***/
-		IUserDao userDao = new UserDao();
-		
-		/***When***/
-		List<User> userList = userDao.getUserList();
-		
-		/***Then***/
-		assertEquals(5, userList.size());
-	}
+//	@Test
+//	public void getUserListTest() {
+//		/***Given***/
+//		IUserDao userDao = new UserDao();
+//		
+//		/***When***/
+//		List<User> userList = userDao.getUserList();
+//		
+//		/***Then***/
+//		assertEquals(5, userList.size());
+//	}
 	
 	/**
 	 * 
@@ -47,5 +47,17 @@ public class UserDaoTest {
 		assertEquals("브라운", userVo.getUserNm());
 		assertEquals("brown1234", userVo.getPass());
 	}
-
+	
+	@Test
+	public void getCntUserListTest() {
+		/***Given***/
+		IUserDao userDao = new UserDao();
+		
+		/***When***/
+		List<User> userList = userDao.getCntUserList();
+		
+		/***Then***/
+		assertEquals(50, userList.size());
+		System.out.println(userList);
+	}
 }

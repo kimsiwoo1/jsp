@@ -50,4 +50,11 @@ public class UserDao implements IUserDao{
 		return userVo;
 	}
 
+	@Override
+	public List<User> getCntUserList() {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		List<User> cntList = sqlSession.selectList("user.getCntUserList");
+		return cntList;
+	}
+
 }
