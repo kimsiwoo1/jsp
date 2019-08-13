@@ -15,7 +15,7 @@
 	<hr>
 </form>
 
-<form action="<%=request.getContextPath()%>/jsp/mul.jsp" method="get">
+<form action="${pageContext.request.contextPath }/jsp/mul.jsp" method="get">
 	곱하기<br>
 	숫자1 : <input type="text" name="number"/>
 	숫자2 : <input type="text" name="number2"/>
