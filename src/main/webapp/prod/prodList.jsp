@@ -20,34 +20,10 @@
 
 <%@ include file="/commonjsp/basicLib.jsp"%>
 
-<script>
-//문서의 로딩이 완료되고 나서
-$(document).ready(function(){
-	
-	//사용자 정보 클릭시 이벤트 핸들러
-	$(".userTr").on("click", function(){
-		console.log("userTr click");
-		
-		//클릭된 tr태그의 자식태그(td)중 첫번째 자식의 텍스트 문자열
-		console.log($(this).children().first().text());
-		
-		//input 태그에 값 설정
-		$("#userId").val($(this).children().first().text());
-		
-		//form 태그이용 전송
-		console.log($("#frm").serialize());
-		
-		$("#frm").submit();
-	})
-})
-</script>
-
 </head>
 
 <body>
-<form id="frm" action="${cp }/user" method="get">
-	<input type="hidden" id="userId" name="userId"/>
-</form>
+
 
 	<!-- header -->
 	header
@@ -65,34 +41,26 @@ $(document).ready(function(){
 
 				<div class="row">
 					<div class="col-sm-8 blog-main">
-						<h2 class="sub-header">사용자리스트</h2>
+						<h2 class="sub-header">prodList</h2>
 						<div class="table-responsive">
 							<table class="table table-striped">
 								<tr>
-									<th>사용자 아이디</th>
-									<th>사용자 이름</th>
-									<th>사용자 별명</th>
-									<th>등록일시</th>
+									<th>제품그룹명</th>
+									<th>제품그룹번호</th>
+									<th>바이어이름</th>
+									<th>제품아이디</th>
+									<th>제품명</th>
+									<th>가격</th>
 								</tr>
-<%-- 								<% 
-//             	List<User> userList = (List<User>)request.getAttribute("userList");
-            		
-//             		for(User userVo : userList){
-<%--             %> --%>
-<!-- 								<tr> -->
-<%-- 									<td><%=userVo.getUserId() %></td> --%>
-<%-- 									<td><%=userVo.getUserNm() %></td> --%>
-<!-- 									<td></td> -->
-<!-- 									<td></td> -->
-<!-- 								</tr> -->
-<%-- 								<%} %> --%>
-<%-- 								for(User user : userList) --%>
-								<c:forEach items="${userList }" var="user">
-									<tr class="userTr">
-										<td>${user.userId }</td>
-										<td>${user.userNm }</td>
-										<td>${user.alias }</td>
-										<td>${user.reg_dt_fmt }</td>
+
+								<c:forEach items="${prod }" var="prod">
+									<tr class="lprodTr">
+										<td>${prod.lprod_nm }</td>
+										<td>${prod.lprod_gu }</td>
+										<td>${prod.buyer_name }</td>
+										<td>${prod.prod_id }</td>
+										<td>${prod.prod_name }</td>
+										<td>${prod.prod_price }</td>
 									</tr>
 								</c:forEach>
 							</table>

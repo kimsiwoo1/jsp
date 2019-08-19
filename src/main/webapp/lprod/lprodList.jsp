@@ -19,10 +19,23 @@
 <title>Jsp-basicLib</title>
 
 <%@ include file="/commonjsp/basicLib.jsp"%>
+<script>
+	$(document).ready(function(){
+		$(".lprodTr").on("click", function(){
+			console.log($(this).children().eq(1).text());
+			$("#lprodGu").val($(this).children().eq(1).text());
+			
+			$("#frm").submit();
+		})
+	})
+</script>
 
 </head>
 
 <body>
+<form id="frm" action="${cp}/prodList" method="get">
+	<input type="hidden" id="lprodGu" name="lprodGu">
+</form>
 
 	<!-- header -->
 	header
@@ -62,7 +75,7 @@
 <%-- 								<%} %> --%>
 <%-- 								for(User user : userList) --%>
 								<c:forEach items="${lprodList }" var="lprod">
-									<tr>
+									<tr class="lprodTr">
 										<td>${lprod.lprod_id }</td>
 										<td>${lprod.lprod_gu }</td>
 										<td>${lprod.lprod_nm }</td>
