@@ -3,13 +3,15 @@ package kr.or.ddit.user.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import kr.or.ddit.user.model.User;
 
 public interface IUserDao {
 	
-	List<User> getUserList();
+	List<User> getUserList(SqlSession sqlSession);
 
-	User getUser(String userId);
+	User getUser(SqlSession sqlSession, String userId);
 	
-	List<User> getCntUserList();
+	List<User> getCntUserList(SqlSession sqlSession);
 }
