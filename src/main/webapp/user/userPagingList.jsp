@@ -109,9 +109,8 @@ $(document).ready(function(){
 							</table>
 						</div>
 
-						<a class="btn btn-default pull-right">사용자 등록</a>
+						<a href="${cp }/userForm" class="btn btn-default pull-right">사용자 등록</a>
 
-				
 						<div class="text-center">
 							<ul class="pagination">
 								<%--이전 페이지 가기 :지금 있는 페이지에서 한 페이지 전으로

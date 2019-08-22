@@ -12,6 +12,10 @@ public class User {
 	private String alias;	//별명
 	private Date reg_dt;	//등록일
 	private String reg_dt_fmt = "2019-09-20";
+	private String addr1;
+	private String addr2;
+	private String zipcode;
+	
 
 	public User() {
 	
@@ -65,11 +69,43 @@ public class User {
 		this.reg_dt = reg_dt;
 	}
 
+	public String getAddr1() {
+		return addr1;
+	}
+
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+
+	public String getAddr2() {
+		return addr2;
+	}
+
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public void setReg_dt_fmt(String reg_dt_fmt) {
+		this.reg_dt_fmt = reg_dt_fmt;
+	}
+
+	
+	
 	@Override
 	public String toString() {
-		return "UserVo [userId=" + userId + ", pass=" + pass + ", userName=" + userNm + "]";
+		return "User [userId=" + userId + ", pass=" + pass + ", userNm=" + userNm + ", alias=" + alias + ", reg_dt="
+				+ reg_dt + ", reg_dt_fmt=" + reg_dt_fmt + ", addr1=" + addr1 + ", addr2=" + addr2 + ", zipcode="
+				+ zipcode + "]";
 	}
-	
+
 	public boolean checkLoginValidate(String userId, String pass) {
 		
 		if(userId.equals(this.userId) && pass.equals(this.pass))
