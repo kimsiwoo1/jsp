@@ -1,16 +1,15 @@
-package kr.or.ddit.lprod.repository;
+package kr.or.ddit.lprod.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.ddit.common.model.Page;
 import kr.or.ddit.lprod.model.Lprod;
 
-public interface ILprodDao {
+public interface ILprodService {
 	public List<Lprod> getAllLprod();
 	
-	public List<Lprod> getLprodPagingList(SqlSession sqlSession, Page page);
-	
-	int getUserTotalCnt(SqlSession sqlSession);
+	public Map<String, Object> getLprodPagingList(Page page);
 }

@@ -1,4 +1,4 @@
-package kr.or.ddit.user.web;
+package kr.or.ddit.lprod.web;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,22 +11,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.or.ddit.common.model.Page;
+import kr.or.ddit.lprod.model.Lprod;
+import kr.or.ddit.lprod.service.ILprodService;
+import kr.or.ddit.lprod.service.LprodService;
 import kr.or.ddit.user.model.User;
 import kr.or.ddit.user.service.IUserService;
 import kr.or.ddit.user.service.UserService;
 
 /**
- * Servlet implementation class UserPagingListController
+ * Servlet implementation class LprodPagingListController
  */
-@WebServlet("/userPagingList")
-public class UserPagingListController extends HttpServlet {
+@WebServlet("/lprodPagingList")
+public class LprodPagingListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private IUserService userService;
+
+	private ILprodService lprodService;
 	
 	@Override
 	public void init() throws ServletException {
-		userService = new UserService();
+		lprodService = new LprodService();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,25 +38,25 @@ public class UserPagingListController extends HttpServlet {
 		String pagesizeStr = request.getParameter("pagesize");
 		
 		int page = pageStr == null ? 1 : Integer.parseInt(pageStr);
-		int pagesize = pagesizeStr == null ?  10 : Integer.parseInt(pagesizeStr);
+		int pagesize = pagesizeStr == null ?  5 : Integer.parseInt(pagesizeStr);
 		
 		
 		Page p = new Page(page, pagesize);
 		request.setAttribute("pageVo", p);
 		
 		//userService 객체를 이용하여 getUserPagingList를 호출
-		Map<String, Object> resultMap = userService.getUserPagingList(p);
-		List<User> userList = (List<User>)resultMap.get("userList");
+		Map<String, Object> resultMap = lprodService.getLprodPagingList(p);
+		List<Lprod> lprodList = (List<Lprod>)resultMap.get("lprodList");
 		int paginationSize = (Integer)resultMap.get("paginationSize");
 		
 		//반환된 사용자 리스트를 request객체에 속성으로 저장
-		request.setAttribute("userList", userList);
+		request.setAttribute("lprodList", lprodList);
 		request.setAttribute("paginationSize", paginationSize);
 		
 		//조회된 사용자 리스트 정보를 html로 만들어줄 jsp로 요청 위임
 		//webapp/user/userPagingList.jsp
 		//		userList.jsp 복사
-		request.getRequestDispatcher("/user/userPagingList.jsp").forward(request, response);
+		request.getRequestDispatcher("/lprod/lprodPagingList.jsp").forward(request, response);
 	}
 
 }
