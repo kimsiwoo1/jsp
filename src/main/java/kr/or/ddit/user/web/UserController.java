@@ -21,6 +21,7 @@ import kr.or.ddit.user.service.UserService;
 @WebServlet("/user")
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	private IUserService userService;
 	
@@ -31,7 +32,7 @@ public class UserController extends HttpServlet {
 		userService = new UserService();
 	}
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
 		
@@ -43,7 +44,12 @@ public class UserController extends HttpServlet {
 		
 		request.getRequestDispatcher("/user/user.jsp").forward(request, response);
 		
-		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		logger.debug("userController.doPost");
+		doGet(req, resp);
 	}
 
 }

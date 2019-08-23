@@ -41,4 +41,9 @@
   	insert into users(userId, userNm, pass, reg_dt, alias, addr1, addr2, zipcode)
 	values(#{userId}, #{userNm}, #{pass}, #{reg_dt}, #{alias}, #{addr1}, #{addr2}, #{zipcode})
   </insert>
+  
+  <!-- 사용자 삭제 -->
+  <delete id="deleteUser" parameterType="String">
+  	delete users where userid=#{userId}
+  </delete>
 </mapper>

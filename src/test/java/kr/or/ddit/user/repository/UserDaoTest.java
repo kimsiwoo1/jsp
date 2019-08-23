@@ -22,6 +22,8 @@ public class UserDaoTest {
 	
 	private IUserDao userDao;
 	private SqlSession sqlSession;
+	
+	private String userId = "brownTest";
 	//junit 테스트 메소드 실행 순서
 	//@Before -> @Test -> @After
 	//@Test테스트 메소드가 실행되기 전에 @Before이 적용된 메소드를 먼저 실행하고, @Test 메소드 실행 후
@@ -34,6 +36,8 @@ public class UserDaoTest {
 		logger.debug("before");
 		userDao = new UserDao();
 		sqlSession = MybatisUtil.getSession();
+		
+		userDao.deleteUser(sqlSession, userId);
 	}
 	
 	//테스트에 공통적으로 사용한 자원을 해제
@@ -132,7 +136,9 @@ public class UserDaoTest {
 	public void insertUserTest() throws ParseException {
 		/***Given***/
 		User user = new User();
-		user.setUserId("brownTest");
+		
+	
+		user.setUserId(userId);
 		user.setUserNm("브라운테스트");
 		user.setPass("brownTest1234");
 		user.setReg_dt(new SimpleDateFormat("yyyy-MM-dd").parse("2019-08-08"));
@@ -141,8 +147,10 @@ public class UserDaoTest {
 		user.setAddr2("영민빌딩 2층 DDIT");
 		user.setZipcode("34940");
 		
+		
 		/***When***/
 		int insertCnt = userDao.insertUser(sqlSession, user);
+		sqlSession.commit();
 		
 		/***Then***/
 		assertEquals(1, insertCnt);
