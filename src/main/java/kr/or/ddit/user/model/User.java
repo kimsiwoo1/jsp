@@ -5,6 +5,8 @@ import java.util.Date;
 
 import com.sun.media.jfxmedia.logging.Logger;
 
+import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
+
 public class User {
 	private String userId;			//사용자 아이디
 	private String pass;			//사용자 비밀번호
@@ -15,6 +17,9 @@ public class User {
 	private String addr1;
 	private String addr2;
 	private String zipcode;
+	private String filename;
+	private String realfilename;
+	private String realfilename2;
 	
 
 	public User() {
@@ -26,7 +31,7 @@ public class User {
 	}
 
 	public User(String userId, String userNm, String alias, Date reg_dt, String addr1, String addr2,
-			String zipcode, String pass) {
+			String zipcode, String pass, String filename, String realfilename) {
 		this.userId = userId;
 		this.userNm = userNm;
 		this.alias = alias;
@@ -35,6 +40,33 @@ public class User {
 		this.addr2 = addr2;
 		this.zipcode = zipcode;
 		this.pass = pass;
+		this.filename = filename;
+		this.realfilename = realfilename;
+	}
+
+	
+	public String getRealfilename2() {
+		return realfilename2;
+	}
+
+	public void setRealfilename2(String realfilename2) {
+		this.realfilename2 = realfilename2;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getRealfilename() {
+		return realfilename;
+	}
+
+	public void setRealfilename(String realfilename) {
+		this.realfilename = realfilename;
 	}
 
 	public String getUserId() {
@@ -110,17 +142,20 @@ public class User {
 	}
 
 	
-	
+
+
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", pass=" + pass + ", userNm=" + userNm + ", alias=" + alias + ", reg_dt="
 				+ reg_dt + ", reg_dt_fmt=" + reg_dt_fmt + ", addr1=" + addr1 + ", addr2=" + addr2 + ", zipcode="
-				+ zipcode + "]";
+				+ zipcode + ", filename=" + filename + ", realfilename=" + realfilename + ", realfilename2="
+				+ realfilename2 + "]";
 	}
 
 	public boolean checkLoginValidate(String userId, String pass) {
-		
-		if(userId.equals(this.userId) && pass.equals(this.pass))
+		//암호화 문장끼리 비교
+		if(userId.equals(this.userId) && KISA_SHA256.encrypt(pass).equals(this.pass))
 			return true;
 		
 		return false;

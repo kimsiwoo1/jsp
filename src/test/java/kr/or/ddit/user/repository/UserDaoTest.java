@@ -128,7 +128,7 @@ public class UserDaoTest {
 		int totalCnt = userDao.getUserTotalCnt(sqlSession);
 		
 		/***Then***/
-		assertEquals(105, totalCnt);
+		assertEquals(108, totalCnt);
 		
 	}
 	
@@ -154,5 +154,29 @@ public class UserDaoTest {
 		
 		/***Then***/
 		assertEquals(1, insertCnt);
+	}
+	
+	@Test
+	public void updateUserTest() throws ParseException {
+		/***Given***/
+		User user = new User();
+		
+	
+		user.setUserId("xuserid1");
+		user.setUserNm("xuserid1테스트");
+		user.setPass("xuserid11234");
+		user.setReg_dt(new SimpleDateFormat("yyyy-MM-dd").parse("2019-08-08"));
+		user.setAlias("엑스유저테스트");
+		user.setAddr1("대전광역시 중구 중앙로 76");
+		user.setAddr2("영민빌딩 2층 DDIT");
+		user.setZipcode("34940");
+		
+		
+		/***When***/
+		int updateCnt = userDao.updateUser(sqlSession, user);
+		//sqlSession.commit();
+		
+		/***Then***/
+		assertEquals(1, updateCnt);
 	}
 }
