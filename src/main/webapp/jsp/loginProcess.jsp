@@ -22,7 +22,7 @@
 	 <%
 	 	//parameter 관련 메소드를 호출하기 전에 setCharacterEncoding 메소드를 호출해야
 	 	//인코딩 설정이 적용된다
-	 	request.setCharacterEncoding("utf-8");
+	 	//request.setCharacterEncoding("utf-8");
 	 %>
 	 
 	 request method : <%=request.getMethod() %> <br> 
