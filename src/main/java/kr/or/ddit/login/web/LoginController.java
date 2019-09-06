@@ -23,7 +23,7 @@ public class LoginController extends HttpServlet {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-	private IUserService userService;
+	private IUserService userService;	// IUserService
 	
 	@Override
 	public void init() throws ServletException {
@@ -74,7 +74,6 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		logger.debug("login controller doPost()");
 		
-		
 		//userId, password 파라미터 logger 출력
 		String userId = request.getParameter("userId");
 		String pass = request.getParameter("pass");
@@ -103,7 +102,9 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			logger.debug("session.getId() : {}", session.getId());
 			
+			//session.removeAttribute("S_USERVO");
 			session.setAttribute("S_USERVO", user);
+			
 			request.setAttribute("elTest", "elTestValue");
 			
 			request.getRequestDispatcher("/main.jsp").forward(request, response);
