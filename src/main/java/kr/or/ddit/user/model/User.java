@@ -3,11 +3,15 @@ package kr.or.ddit.user.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.sun.media.jfxmedia.logging.Logger;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
 
-import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
+import  kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
 
-public class User {
+
+
+
+public class User implements HttpSessionBindingListener{
 	private String userId;			//사용자 아이디
 	private String pass;			//사용자 비밀번호
 	private String userNm;		//사용자 이름
@@ -159,6 +163,16 @@ public class User {
 			return true;
 		
 		return false;
+	}
+
+	@Override
+	public void valueBound(HttpSessionBindingEvent event) {
+		
+	}
+
+	@Override
+	public void valueUnbound(HttpSessionBindingEvent event) {
+		
 	}
 	
 }
